@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<navigation-bar title="Search" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="scrollarea">
+  
+  <view class="container">
+    <view>
+      <input class="weui-input"  maxlength="50" bindinput="bindKeyInput" placeholder="执行码" />
+      <view class="camera-area">
+        <camera device-position="back" flash="auto" binderror="onCameraError" bindscancode="onScanCode" style="width: 300px; height: 400px;"></camera>
+        <text style="position: absolute; top: 10px; text-align: center; color: red; font-size: 14px;">宝宝们请尽量拍题目的图形哦，文本不重要</text>
+      </view>
+      <view class="button-container">
+        <button bindtap="takePhoto">拍照</button>
+        <button bindtap="chooseMedia">上传本地图片</button>
+        <!-- <input class="weui-input"  maxlength="50" bindinput="bindKeyInput" placeholder="执行码" style="height: 15px;"/> -->
+      </view>
+      <modal times="{{times}}" image="{{resultImageSrc}}" show="{{showModal}}"></modal>
+    </view>
+  </view>
+</scroll-view>

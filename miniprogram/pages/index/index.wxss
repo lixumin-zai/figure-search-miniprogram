@@ -1,0 +1,41 @@
+.scrollarea {
+  height: 100vh;
+  width: 100%;
+}
+
+.container {
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.camera-area {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+button {
+  border: 1px solid #ccc;      /* 边框 */
+  margin-top: 20px;
+  width:50px;
+  border-radius: 4px;          /* 圆角边框 */
+}
+
+
+
+.weui-input {
+  margin: 20px;                 /* 容器外边距 */
+  text-align: center; /* 居中文本 */
+  padding: 10px;               /* 输入框内边距 */
+  height: 15px;
+  border: 1px solid #ccc;      /* 边框 */
+  border-radius: 4px;          /* 圆角边框 */
+  font-size: 11px;             /* 字体大小 */
+  background-color: #f9f9f9;   /* 背景色 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+

@@ -1,0 +1,48 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  width: 80%;
+  max-width: 400px;
+}
+
+.modal-header{
+  display: flex;                /* 使用flexbox布局 */
+  flex-direction: column;       /* 设定为竖直方向排列 */
+  justify-content: center;      /* 水平居中 */
+  align-items: center;          /* 垂直居中 */
+}
+
+.modal-body,
+.modal-footer {
+  display: flex;                /* 使用 flexbox 布局 */
+  justify-content: center;      /* 水平居中对齐 */
+  margin-bottom: 10px;
+}
+
+
+.close {
+  cursor: pointer;
+  float: right;
+}
