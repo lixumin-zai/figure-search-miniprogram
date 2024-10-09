@@ -51,19 +51,19 @@ Component({
           })
           const base64Image = res.data;
           // 发送POST请求，将图片以Base64格式上传
-          wx.request({
-            url: 'https://lismin.online:23333/search-mini',
-            method: 'POST',
-            header: {
-              'content-type': 'application/json' // 设置请求头，发送JSON数据
-            },
+          wx.cloud.callFunction({
+            name: 'post', // 云函数名称
             data: {
-              image: base64Image, // 发送Base64格式的图片数据
-              verification_code: this.data.inputValue
+              data: {
+                image: base64Image, // 发送Base64格式的图片数据
+                verification_code: this.data.inputValue
+              },
             },
-            success: (uploadRes:any) => {
+            success: (resp:any) => {
+              const uploadRes = resp.result;
               if (uploadRes.data && uploadRes.data.code === "0") {
                 // 将返回的Base64图片设置到页面
+                
                 this.setData({
                   resultImageSrc: 'data:image/png;base64,' + uploadRes.data.image,
                   times: uploadRes.data.times,
@@ -76,6 +76,7 @@ Component({
                 title: '上传失败',
                 icon: 'none',
               });
+              console.log(324)
               console.error('上传失败: ', err);
             },
             complete: () => {

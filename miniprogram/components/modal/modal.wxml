@@ -7,7 +7,7 @@
       </view>
       <view>
         <text wx:if="{{times===-1}}">执行码无效，联系：antibsurl</text>
-        <text wx:if="{{times===0 && image}}"> 联系：antibsurl, 增加次数</text>
+        <text wx:if="{{times===0 && image}}"> 增加次数联系：antibsurl</text>
       </view>
     </view>
     <view class="modal-body">
