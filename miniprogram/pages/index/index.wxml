@@ -1,7 +1,6 @@
 <!--index.wxml-->
 <navigation-bar title="Search" back="{{false}}" color="black" background="#FFF"></navigation-bar>
 <scroll-view class="scrollarea">
-  
   <view class="container">
     <view>
       <input class="weui-input"  maxlength="50" bindinput="bindKeyInput" placeholder="微信联系antibsurl获取执行码" />
