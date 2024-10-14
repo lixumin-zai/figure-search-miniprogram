@@ -7,6 +7,8 @@ Page({
     times: 1,
     showModal: false,
     photoSrc: '',       // 拍照后的本地图片路径
+    photoImageSrc: '',
+    verification_code: '',
     resultImageSrc: '', // 服务器返回的处理后图片Base64
     inputValue: '',
   },
@@ -48,8 +50,11 @@ Page({
         wx.saveImageToPhotosAlbum({
           filePath: filePath, //图片文件路径
         })
-        const base64Image = res.data;
-
+        const base64Image = String(res.data);
+        this.setData({
+          photoImageSrc: base64Image,
+          verification_code: this.data.inputValue
+        });
         // 发送POST请求，将图片以Base64格式上传
         wx.cloud.callFunction({
           name: 'post', // 云函数名称

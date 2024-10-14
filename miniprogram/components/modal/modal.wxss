@@ -39,10 +39,18 @@
   display: flex;                /* 使用 flexbox 布局 */
   justify-content: center;      /* 水平居中对齐 */
   margin-bottom: 10px;
+  /* column-gap: 30px; 添加按钮之间的间隔 */
 }
 
+.custom-button {
+  border: none;
+  border-radius: 12px; /* 圆角 */
+  margin-bottom: 10px;
 
-.close {
-  cursor: pointer;
-  float: right;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  border: 1px solid #d4d4d4;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+
 }

@@ -3,18 +3,20 @@
   <view class="modal-content">
     <view class="modal-header">
       <view>
-        <text>执行码剩余次数:{{times}}</text>
+        <text>{{verification_code}} 剩余次数:{{times}}</text>
       </view>
       <view>
-        <text wx:if="{{times===-1}}">执行码无效，联系：antibsurl</text>
-        <text wx:if="{{times===0 && image}}"> 增加次数联系：antibsurl</text>
+        <text wx:if="{{times===-1}}" 	user-select="true">{{verification_code}} 无效，请微信联系：antibsurl</text>
+        <text wx:if="{{times===0 && image}}" 	user-select="true"> 增加次数请微信联系：antibsurl</text>
+
       </view>
     </view>
     <view class="modal-body">
       <image wx:if="{{image}}" src="{{image}}" style="width: 100%; height: 400px;"  mode="aspectFit"></image>
     </view>
     <view class="modal-footer">
-      <button bindtap="confirm">确定</button>
+      <button class="custom-button" bindtap="confirm" style="margin:10px;">确定</button>
+      <button class="custom-button" wx:if="{{times>0 && image}}" style="margin:10px; background-color: #b8f8d0; color: rgb(2, 2, 2);"  bindtap="feedback">🙏反馈图片</button>
     </view>
   </view>
 </view>
