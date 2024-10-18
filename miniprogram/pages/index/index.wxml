@@ -1,19 +1,74 @@
 <!--index.wxml-->
 <navigation-bar title="Search" back="{{false}}" color="black" background="#FFF"></navigation-bar>
-<scroll-view class="scrollarea">
+<scroll-view class="scrollarea" type="list">
   <view class="container">
     <view>
-      <input class="weui-input custom-input" maxlength="50" bindinput="bindKeyInput" placeholder="此处输入执行码，无执行码联系antibsurl" />
-      <text style="top: 4px; text-align: center; color: red; font-size: 14px;">⚠️宝宝们请尽量拍题目的图形哦，文本不重要</text>
-      <view class="camera-area">
-        <camera device-position="back" flash="auto" binderror="onCameraError" bindscancode="onScanCode" style="width: 300px; height: 400px;"></camera>
+      
+      <view class="warning" style="top: 4px; text-align: center;">
+        <text style="color: red; font-size: 12px; font-weight: bold; display: inline-block;">下面是你唯一的执行码，剩余{{times}}次，有问题联系👉</text>
+        <button style="color: blue; font-size: 12px; font-weight: bold;display: inline-block; padding: 0; margin: 0px; width: 23px; height: 17px; background-color: rgba(133, 125, 125, 0.308); border: none; text-align: center;" open-type='contact'>💁</button>
       </view>
-      <view class="button-container">
+
+      <!-- <input class="weui-input custom-input" maxlength="50" bindinput="bindKeyInput" bindconfirm="inputConfirm"
+      value="{{inputValue}}" placeholder="此处输入执行码，无执行码联系antibsurl" />
+      <view bindtap="copyText" style="padding: 10px 20px; background-color: #1aad19; color: #fff; border-radius: 5px; cursor: pointer;">copy</view> -->
+
+      <view style="position: relative; width: 100%; display: flex; align-items: center; margin-top: 8px;">
+      <!-- 输入框 -->
+      <input class="weui-input custom-input" maxlength="50" bindinput="bindKeyInput" bindconfirm="inputConfirm"
+          value="{{inputValue}}" placeholder="此处输入执行码，无执行码联系antibsurl" style="flex: 1; padding-right: 40px; height: 20px;"/>
+
+      <!-- 复制按钮，使用绝对定位 -->
+      <view bindtap="copyText" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); padding: 8px 2px; background-color: #b1ddb1; color: rgb(0, 0, 0); border-radius: 5px; font-size: 10px;">copy</view>
+    </view>
+
+      <!-- <text style="top: 4px; text-align: center; color: red; font-size: 14px;">⚠️宝宝们请<b>竖着</b>拍题目的<b>图形</b>哦，文本不重要</text> -->
+      <view class="warning" style="top: 4px; text-align: center;">
+        <text style="color: red; font-size: 14px; font-weight: bold; display: inline-block;">⚠️</text>
+        <text style="color: rgb(3, 3, 3); font-size: 14px; display: inline-block;">宝宝们请</text>
+        <text style="color: red; font-size: 14px; font-weight: bold; display: inline-block;">竖着拍</text>
+        <text style="color: rgb(10, 10, 10); font-size: 14px; display: inline-block;">题目的</text>
+        <text style="color: red; font-size: 14px; font-weight: bold; display: inline-block;">图形</text>
+        <text style="color: rgb(0, 0, 0); font-size: 14px; display: inline-block;">哦，文本不重要</text>
+        
+      </view>
+      <view class="camera-area">
+        <camera device-position="back" flash="auto" binderror="onCameraError" bindscancode="onScanCode" style="width: 300px; height: 400px;box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);border-radius: 3%"></camera>
+      </view>
+      <!-- <view class="button-container">
         <button bindtap="takePhoto" >拍照</button>
         <button bindtap="chooseMedia">上传本地图片</button>
-        <!-- <input class="weui-input"  maxlength="50" bindinput="bindKeyInput" placeholder="执行码" style="height: 15px;"/> -->
+      </view> □○-->
+      <view style="display: flex; justify-content:center; align-items: center; padding: 0 20px;">
+        <!-- <view bindtap="takePhoto" style="width: 60px; height: 60px; border-radius: 50%; margin-top: -75px; text-align: center; background-image: linear-gradient(to bottom, #ffffff3d, #ffffff); color: rgb(255, 255, 255); font-size: 30px; display: flex; justify-content: center; align-items: center; cursor: pointer;">📷
+        </view> -->
+        <view bindtap="takePhoto" style="width: 50px; height: 50px; border-radius: 50%; margin-top: -75px; text-align: center; background-color: rgba(255, 0, 0, 0.301); color: rgb(255, 255, 255); font-size: 30px; display: flex; justify-content: center; align-items: center; cursor: pointer; border: 5px solid rgba(255, 255, 255, 0.514);">
       </view>
-      <modal times="{{times}}" image="{{resultImageSrc}}" show="{{showModal}}" originImage="{{photoImageSrc}}" verification_code="{{verification_code}}"></modal>
+      </view>
+      <view style="display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+        <view bindtap="chooseMedia" style="width: 25px; height: 25px; border-radius: 10%; margin-top: -75px; text-align: center; background-color: rgba(14, 1, 1, 0.37); color: rgb(255, 255, 255); font-size: 30px; display: flex; justify-content: center; align-items: center; cursor: pointer; border: 5px solid rgba(255, 253, 253, 0.349);">
+        
+        <view style="width: 75%; height: 60%; border: 2px solid #fff; border-radius: 3px; position: absolute; top: 12%; background-color: #f5f5f5;"></view>
+  
+        <!-- 内部照片 -->
+        <view style="width: 65%; height: 50%; background-color: #c0c0c0; position: absolute; top: 18%; left: 10%; border-radius: 2px;"></view>
+        
+        <!-- 照片上的山形轮廓 -->
+        <view style="width: 50%; height: 30%; background-color: #f3b5c4; position: absolute; top: 30%; left: 13%; transform: skew(-20deg);"></view>
+        
+        <!-- 照片上的太阳形状 -->
+        <view style="width: 10px; height: 10px; background-color: #f9d71c; border-radius: 50%; position: absolute; top: 22%; left: 55%;"></view>
+
+        <!-- 相机镜头 -->
+        <view style="width: 12px; height: 12px; background-color: rgb(133, 216, 188); border-radius: 50%; position: absolute; bottom: 10%; right: 15%;"></view>
+        </view>
+      </view>
+      <!-- <button bindtap="chooseMedia">上传本地图片</button> -->
+      
+      <view wx:if="{{showModal}}">
+      <modal times="{{times}}" image="{{resultImageSrc}}" show="{{showModal}}" originImage="{{photoImageSrc}}" verification_code="{{verification_code}}" bind:close="modalClose"></modal>
+      </view>
     </view>
+    
   </view>
 </scroll-view>

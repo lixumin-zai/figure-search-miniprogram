@@ -3,6 +3,7 @@
   "projectname": "figure-search",
   "setting": {
     "compileHotReLoad": true,
-    "urlCheck": false
+    "urlCheck": true,
+    "skylineRenderEnable": true
   }
 }

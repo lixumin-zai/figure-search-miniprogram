@@ -34,10 +34,10 @@ button {
   margin: 5px;                 /* 容器外边距 */
   text-align: center; /* 居中文本 */
   padding: 5px;               /* 输入框内边距 */
-  height: 12px;
+  
   border: 1px solid #ccc;      /* 边框 */
   border-radius: 6px;          /* 圆角边框 */
-  font-size: 14px;             /* 字体大小 */
+  font-size: 10px;             /* 字体大小 */
   background-color: #f0e6e6;   /* 背景色 */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 阴影效果 */
   color: rgb(26, 21, 21);                  /* 设置字体颜色为红色 */

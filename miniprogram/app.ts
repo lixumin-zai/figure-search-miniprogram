@@ -1,6 +1,8 @@
 // app.ts
 App<IAppOption>({
-  globalData: {},
+  globalData: {
+    open_id: "",  // 微信用户信息（可选）
+  },
   onLaunch() {
     // 展示本地存储能力
     const logs = wx.getStorageSync('logs') || []
@@ -8,11 +10,5 @@ App<IAppOption>({
     wx.setStorageSync('logs', logs)
     wx.cloud.init()
     // 登录
-    wx.login({
-      success: res => {
-        console.log(res.code)
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      },
-    })
-  },
+  }
 })

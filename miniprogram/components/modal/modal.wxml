@@ -2,18 +2,29 @@
   <view class="modal-overlay" ></view>
   <view class="modal-content">
     <view class="modal-header">
-      <view>
-        <text>{{verification_code}} 剩余次数:{{times}}</text>
-      </view>
+      
       <view>
         <text wx:if="{{times===-1}}" 	user-select="true">{{verification_code}} 无效，请微信联系：antibsurl</text>
         <text wx:if="{{times===0 && image}}" 	user-select="true"> 增加次数请微信联系：antibsurl</text>
 
       </view>
     </view>
-    <view class="modal-body">
-      <image wx:if="{{image}}" src="{{image}}" style="width: 100%; height: 400px;"  mode="aspectFit"></image>
-    </view>
+    <!-- <view class="modal-body"> -->
+      <view style="width: auto; box-sizing: inherit;" bindtap="nextImage"> 
+        <image src="{{showImage}}" style="width: 100%; height: 400px;"  mode="aspectFit"></image>
+      </view>
+
+      <!-- <view wx:if="{{showIndex===1}}" style="width: auto; box-sizing: inherit;" bindtap="nextImage"> 
+        <image  src="https://i-blog.csdnimg.cn/blog_migrate/a0c8c5ad149d917c9d15dd55bb64ee5f.jpeg" style="width: 100%; height: 400px;"  mode="aspectFit"></image>
+      </view>
+
+      <view wx:if="{{showIndex===2}}" style="width: auto; box-sizing: inherit;" bindtap="nextImage"> 
+        <image  src="https://i-blog.csdnimg.cn/blog_migrate/a0c8c5ad149d917c9d15dd55bb64ee5f.jpeg" style="width: 100%; height: 400px;"  mode="aspectFit"></image>
+      </view> -->
+      <view style="text-align: center;" wx:if="{{times>0 && image}}">
+        <text style="text-align: center; color: red; font-size: 14px; font-weight: bold; display: inline-block;">点击图片可以查看其他相似答案</text>
+      </view>
+    <!-- </view> -->
     <view class="modal-footer">
       <button class="custom-button" bindtap="confirm" style="margin:10px;">确定</button>
       <button class="custom-button" wx:if="{{times>0 && image}}" style="margin:10px; background-color: #b8f8d0; color: rgb(2, 2, 2);"  bindtap="feedback">🙏反馈图片</button>
