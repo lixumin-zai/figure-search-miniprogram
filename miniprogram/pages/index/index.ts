@@ -14,7 +14,8 @@ Page({
     verification_code: '',
     resultImageSrc: [] as string[], // 服务器返回的处理后图片Base64
     inputValue: "",
-
+    clipboardText: '',
+    openidCode: "",
   },
   bindKeyInput: function (e: any) {
     this.setData({
@@ -26,7 +27,7 @@ Page({
       showModal: false
     });
   },
-  // 拍照功能
+  // 复制功能
   copyText(){
     wx.setClipboardData({
       data: this.data.inputValue,
@@ -34,10 +35,66 @@ Page({
         wx.showToast({
           title: '复制成功',
           icon: 'success',
-          duration: 1000
+          duration: 2000
         });
       }
     });
+  },
+  copyID(){
+    wx.setClipboardData({
+      data: "antibsurl",
+      success: function() {
+        wx.showToast({
+          title: '直接去微信搜索框黏贴，添加antibsurl',
+          icon: "none",
+          duration: 4000
+        });
+      }
+    });
+  },
+  activateCode(){
+    wx.getClipboardData({
+      success: (res)  => {
+        this.setData({
+          clipboardText: res.data,
+        })
+        const recharge_code_match = this.data.clipboardText.match(/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/);
+        if (this.data.clipboardText.includes("图推搜索") && recharge_code_match) {
+          const recharge_code = recharge_code_match[0];
+          wx.request({
+            url: 'https://lismin.online:23333/activateCode',
+            method: 'GET',
+            data: {
+              openidCode: this.data.openidCode,
+              recharge_code: recharge_code
+            },
+            success: (response:Record<string, any>) => {
+              console.log(response.data)
+              if (response.data.code === 0){
+                console.log("激活成功")
+                this.updataCost();
+                wx.showToast({
+                  title: '增加次数成功',
+                  icon: 'success',
+                  duration: 3000
+                }); // 图推搜索
+              } else {
+                wx.showToast({
+                  title: '增加次数失败',
+                  icon: 'error',
+                  duration: 3000})
+              }
+            }
+          })
+        } else {
+          wx.showToast({
+            title: '请添加antibsurl微信获取添加次数方法',
+            icon: "none",
+            duration: 3000
+          });
+        }
+      }
+    })
   },
   takePhoto() {
     const ctx = wx.createCameraContext();
@@ -247,7 +304,7 @@ Page({
       path: 'pages/index/index'
     }
   },
-  inputConfirm: function () {
+  updataCost: function () {
     const that = this;
     wx.request({
       url: 'https://lismin.online:23333/get_cost_time',
@@ -284,10 +341,11 @@ Page({
               // 处理成功响应
               if (response.data.code === 0){
                 that.setData({
+                  openidCode: response.data.verification_code,
                   inputValue: response.data.verification_code,
                   times: response.data.cost_time
                 })
-                console.log('登录成功:', response.data.verification_code);
+                console.log('登录成功:', that.data.openidCode);
               } else {
                 console.log('登录失败:', response.data.verification_code);
               }
@@ -298,7 +356,8 @@ Page({
             }
           })
       },
-    })
+    });
+    
   // },
   // onShow: function() {
   }

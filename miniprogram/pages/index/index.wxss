@@ -34,7 +34,6 @@ button {
   margin: 5px;                 /* 容器外边距 */
   text-align: center; /* 居中文本 */
   padding: 5px;               /* 输入框内边距 */
-  
   border: 1px solid #ccc;      /* 边框 */
   border-radius: 6px;          /* 圆角边框 */
   font-size: 10px;             /* 字体大小 */
