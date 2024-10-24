@@ -4,7 +4,7 @@
   <view class="container">
     <view>
       <view class="warning" style="top: 4px; text-align: center;">
-        <text style="color: red; font-size: 11px; font-weight: bold; display: inline-block;" user-select="true">下面是你唯一的执行码，剩余{{times}}次，有问题联系</text>
+        <view style="color: red; font-size: 11px; font-weight: bold; display: inline-block;" user-select="true">下面是你唯一的执行码，剩余{{times}}次，有问题联系</view>
         <view style="color: rgb(87, 166, 240); font-size: 12px; font-weight: bold; display: inline-block;" user-select="true" bindtap="copyID">antibsurl</view>
         <!-- <button style="color: blue; font-size: 12px; font-weight: bold;display: inline-block; padding: 0; margin: 0px; width: 23px; height: 17px; background-color: rgba(133, 125, 125, 0.308); border: none; text-align: center;" open-type='contact'>💁</button> -->
       </view>

@@ -58,41 +58,41 @@ Page({
         this.setData({
           clipboardText: res.data,
         })
-        const recharge_code_match = this.data.clipboardText.match(/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/);
-        if (this.data.clipboardText.includes("图推搜索") && recharge_code_match) {
-          const recharge_code = recharge_code_match[0];
-          wx.request({
-            url: 'https://lismin.online:23333/activateCode',
-            method: 'GET',
-            data: {
-              openidCode: this.data.openidCode,
-              recharge_code: recharge_code
-            },
-            success: (response:Record<string, any>) => {
-              console.log(response.data)
-              if (response.data.code === 0){
-                console.log("激活成功")
-                this.updataCost();
-                wx.showToast({
-                  title: '增加次数成功',
-                  icon: 'success',
-                  duration: 3000
-                }); // 图推搜索
-              } else {
-                wx.showToast({
-                  title: '增加次数失败',
-                  icon: 'error',
-                  duration: 3000})
-              }
+        // const recharge_code_match = this.data.clipboardText.match(/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/);
+        // if (this.data.clipboardText.includes("图推搜索") && recharge_code_match) {
+        const recharge_code = this.data.clipboardText;
+        wx.request({
+          url: 'https://lismin.online:23333/activateCode',
+          method: 'GET',
+          data: {
+            openidCode: this.data.openidCode,
+            recharge_code: recharge_code
+          },
+          success: (response:Record<string, any>) => {
+            console.log(response.data)
+            if (response.data.code === 0){
+              console.log("激活成功")
+              this.updataCost();
+              wx.showToast({
+                title: '增加次数成功',
+                icon: 'success',
+                duration: 3000
+              }); // 图推搜索
+            } else if (response.data.code === 1){
+              this.updataCost();
+              wx.showToast({
+                title: '激活码已失效',
+                icon: 'error',
+                duration: 3000})
+            } else {
+              this.updataCost();
+              wx.showToast({
+                title: '增加次数失败，请添加antibsurl获取添加次数方法',
+                icon: 'none',
+                duration: 3000})
             }
-          })
-        } else {
-          wx.showToast({
-            title: '请添加antibsurl微信获取添加次数方法',
-            icon: "none",
-            duration: 3000
-          });
-        }
+          }
+        })
       }
     })
   },
