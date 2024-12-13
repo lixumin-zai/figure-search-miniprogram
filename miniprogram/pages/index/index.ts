@@ -4,7 +4,7 @@ import { debugPrint } from "XrFrame/kanata/lib/index";
 
 // 获取应用实例
 const app = getApp<IAppOption>()
-
+let rewardedVideoAd:any = null
 Page({
   data: {
     times: 1,
@@ -16,6 +16,7 @@ Page({
     inputValue: "",
     clipboardText: '',
     openidCode: "",
+    adViewTimes: 0,
   },
   bindKeyInput: function (e: any) {
     this.setData({
@@ -301,7 +302,8 @@ Page({
   onShareAppMessage: function () {
     return {
       title: '图推搜索',
-      path: 'pages/index/index'
+      path: 'pages/index/index',
+      imageUrl: "/pages/index/share.png"
     }
   },
   updataCost: function () {
@@ -316,6 +318,26 @@ Page({
         // 处理成功响应
         that.setData({
           times: response.data.cost_time
+        })
+      },
+      fail: function(error) {
+        // 处理请求失败
+        console.log('请求失败:', error);
+      }
+    })
+  },
+  updataADViewCost: function () {
+    const that = this;
+    wx.request({
+      url: 'https://lismin.online:23333/get_view_time',
+      method: 'GET',
+      data: {
+        verification_code: this.data.inputValue
+      },
+      success: function(response:Record<string, any>) {
+        // 处理成功响应
+        that.setData({
+          adViewTimes: response.data.ad_view_time
         })
       },
       fail: function(error) {
@@ -343,7 +365,9 @@ Page({
                 that.setData({
                   openidCode: response.data.verification_code,
                   inputValue: response.data.verification_code,
-                  times: response.data.cost_time
+                  verification_code: response.data.verification_code,
+                  times: response.data.cost_time,
+                  adViewTimes: response.data.ad_view_count
                 })
                 console.log('登录成功:', that.data.openidCode);
               } else {
@@ -357,8 +381,109 @@ Page({
           })
       },
     });
-    
-  // },
-  // onShow: function() {
-  }
+  },
+  ShowAD() {
+    rewardedVideoAd.onLoad(() => {
+      console.log('激励视频 广告加载成功')
+    })
+    rewardedVideoAd.show()
+    .then(() => console.log('激励视频 广告显示'))
+  },
+  isShowAD() {
+    if (this.data.adViewTimes >= 3){
+      wx.showModal({
+        title: '提示',
+        content: '今天观看已经超过3次，明天观看才能添加次数哦',
+        success: (res) => {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '观看30秒广告可以获得机会\r\n今天还可以看广告'+ Math.max((3 - this.data.adViewTimes), 0) + '次\r\n第一次给1次机会\r\n第二次给2次机会\r\n第三次给3次机会',
+        success: (res) => {
+          if (res.confirm) {
+            this.ShowAD();
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    }
+  },
+  onLoad() {
+    if(wx.createRewardedVideoAd){
+      rewardedVideoAd = wx.createRewardedVideoAd({ adUnitId: 'adunit-140bbb8a99b57a09' })
+      rewardedVideoAd.onLoad(() => {
+        console.log('onLoad event emit')
+      })
+      rewardedVideoAd.onError((err:any) => {
+        console.log('onError event emit', err)
+      })
+      rewardedVideoAd.onClose((res:any) => {
+        console.log('onClose event emit', res)
+        if (res.isEnded){
+          wx.request({
+            url: 'https://lismin.online:23333/reward',
+            method: 'GET',
+            data: {
+              verification_code: this.data.verification_code
+            },
+            success: (response:Record<string, any>) => {
+              // 处理成功响应
+              if (response.data.code === 0){
+                let old_cost_time = this.data.times
+                this.updataCost();
+                wx.showModal({
+                  title: '提示',
+                  content: '添加次数成功: '+ old_cost_time+ "+" + response.data.add_times,
+                  success: (res) => {
+                    if (res.confirm) {
+                      console.log('用户点击确定')
+                    } else if (res.cancel) {
+                      console.log('用户点击取消')
+                    }
+                  }
+                })
+                this.updataADViewCost();
+                console.log('添加成功:');
+              } else if (response.data.code === 1){
+                wx.showModal({
+                  title: '提示',
+                  content: '今天观看已经超过3次，明天观看才能添加次数哦',
+                  success: (res) => {
+                    if (res.confirm) {
+                      console.log('用户点击确定')
+                    } else if (res.cancel) {
+                      console.log('用户点击取消')
+                    }
+                  }
+                })
+              } else {
+                console.log('失败:', response.data.msg)
+              }
+            },
+            fail: function(error) {
+              // 处理请求失败
+              console.log('请求失败:', error);
+            }
+          })
+        }
+      })
+    }
+  },
+  adLoad() {
+    console.log('原生模板广告加载成功')
+  },
+  adError(err:any) {
+    console.error('原生模板广告加载失败', err)
+  },
+  adClose() {
+    console.log('原生模板广告关闭')
+  },
 })

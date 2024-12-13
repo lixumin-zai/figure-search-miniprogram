@@ -4,8 +4,9 @@
   <view class="container">
     <view>
       <view class="warning" style="top: 4px; text-align: center;">
-        <view style="color: red; font-size: 11px; font-weight: bold; display: inline-block;" user-select="true">下面是你唯一的执行码，剩余{{times}}次，有问题联系</view>
-        <view style="color: rgb(87, 166, 240); font-size: 12px; font-weight: bold; display: inline-block;" user-select="true" bindtap="copyID">antibsurl</view>
+        <view style="color: rgb(0, 0, 0); font-size: 11px; font-weight: bold; display: inline-block;" user-select="true">下面是你唯一的执行码，剩余</view>
+        <view style="color: red; font-size: 11px; font-weight: bold; display: inline-block;">{{times}}</view>
+        <view style="color: rgb(0, 0, 0); font-size: 11px; font-weight: bold; display: inline-block;">次</view>
         <!-- <button style="color: blue; font-size: 12px; font-weight: bold;display: inline-block; padding: 0; margin: 0px; width: 23px; height: 17px; background-color: rgba(133, 125, 125, 0.308); border: none; text-align: center;" open-type='contact'>💁</button> -->
       </view>
 
@@ -17,10 +18,10 @@
       <!-- 输入框 -->
       <!-- <input class="weui-input custom-input" maxlength="50" bindinput="bindKeyInput" bindconfirm="inputConfirm" value="{{inputValue}}" placeholder="此处输入执行码，无执行码联系antibsurl" style="flex: 1; padding-right: 40px; height: 20px;"/> -->
 
-      <view class="weui-input custom-input"  bindtap="copyText"  style="flex: 1; padding-right: 40px; height: 20px; text-align: center; align-items: center; display: flex; justify-content: center;">{{inputValue}}</view>
+      <view class="weui-input custom-input"  bindtap="copyText"  style="flex: 1; padding-right: 40px; height: 30px; text-align: center; align-items: center; display: flex; justify-content: center;">{{inputValue}}</view>
 
       <!-- 复制按钮，使用绝对定位 -->
-      <view bindtap="activateCode" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); padding: 6px 8px; background-color: #b1ddb1; color: rgb(0, 0, 0); border-radius: 5px; font-size: 10px;">+</view>
+      <view bindtap="activateCode" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); padding: 6px 10px; background-color: #b1ddb1; color: rgb(0, 0, 0); border-radius: 5px; font-size: 20px;">+</view>
     </view>
 
       <!-- <text style="top: 4px; text-align: center; color: red; font-size: 14px;">⚠️宝宝们请<b>竖着</b>拍题目的<b>图形</b>哦，文本不重要</text> -->
@@ -65,7 +66,20 @@
         </view>
       </view>
       <!-- <button bindtap="chooseMedia">上传本地图片</button> -->
+      <!-- 激励广告 -->
+      <view style="display: flex; justify-content: flex-end; align-items: center; padding: 0 20px;">
+        <view bindtap="isShowAD" style="width: 40px; height: 25px; border-radius: 10%; margin-top: -75px; text-align: center; background-color: rgba(14, 1, 1, 0.37); color: rgb(255, 187, 0); font-size: 10px; display: flex; justify-content: center; align-items: center; cursor: pointer; border: 5px solid rgba(255, 253, 253, 0.349);">
+          增加次数
+        </view>
+      </view>
       
+      <view class="warning" style="top: 10px; text-align: center;"> 
+      <view style="color: rgb(255, 0, 0); font-size: 14px; font-weight: bold; display: inline-block;" user-select="true" bindtap="copyID">快速添加次数或有问题微信联系</view>
+      <view style="color: rgb(87, 166, 240); font-size: 12px; font-weight: bold; display: inline-block;" user-select="true" bindtap="copyID">antibsurl</view>
+      </view>
+      
+      <ad-custom unit-id="adunit-63e06bc8b6a004cd" bindload="adLoad" binderror="adError" bindclose="adClose" style="width: 90%; margin: 20px auto;"></ad-custom>
+
       <view wx:if="{{showModal}}">
       <modal times="{{times}}" image="{{resultImageSrc}}" show="{{showModal}}" originImage="{{photoImageSrc}}" verification_code="{{verification_code}}" bind:close="modalClose"></modal>
       </view>
