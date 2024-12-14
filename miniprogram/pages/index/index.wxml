@@ -41,10 +41,10 @@
         <button bindtap="takePhoto" >拍照</button>
         <button bindtap="chooseMedia">上传本地图片</button>
       </view> □○-->
-      <view style="display: flex; justify-content:center; align-items: center; padding: 0 20px;">
+      <view style="display: flex; justify-content:center; align-items: center; padding: 0 20px;position: relative;">
         <!-- <view bindtap="takePhoto" style="width: 60px; height: 60px; border-radius: 50%; margin-top: -75px; text-align: center; background-image: linear-gradient(to bottom, #ffffff3d, #ffffff); color: rgb(255, 255, 255); font-size: 30px; display: flex; justify-content: center; align-items: center; cursor: pointer;">📷
         </view> -->
-        <view bindtap="takePhoto" style="width: 50px; height: 50px; border-radius: 50%; margin-top: -75px; text-align: center; background-color: rgba(255, 0, 0, 0.301); color: rgb(255, 255, 255); font-size: 30px; display: flex; justify-content: center; align-items: center; cursor: pointer; border: 5px solid rgba(255, 255, 255, 0.514); z-index: 9999;">
+        <view bindtap="takePhoto" style="width: 50px; height: 50px; border-radius: 50%; margin-top: -75px; text-align: center; background-color: rgba(255, 0, 0, 0.301); color: rgb(255, 255, 255); font-size: 30px; display: flex; justify-content: center; align-items: center; cursor: pointer; border: 5px solid rgba(255, 255, 255, 0.514);">
         </view>
       </view>
       <view style="display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
@@ -66,8 +66,8 @@
       </view>
       <!-- <button bindtap="chooseMedia">上传本地图片</button> -->
       <!-- 激励广告 -->
-      <view style="display: flex; justify-content: flex-end; align-items: center; padding: 0 20px;z-index: 10000;">
-        <view bindtap="isShowAD" style="width: 40px; height: 25px; border-radius: 10%; margin-top: -75px; text-align: center; background-color: rgba(14, 1, 1, 0.37); color: rgb(255, 187, 0); font-size: 10px; display: flex; justify-content: center; align-items: center; cursor: pointer; border: 5px solid rgba(255, 253, 253, 0.349);z-index: 10000;">
+      <view style="display: flex; justify-content: flex-end; align-items: center; padding: 0 20px;position: relative;">
+        <view bindtap="isShowAD" style="width: 40px; height: 25px; border-radius: 10%; margin-top: -75px; text-align: center; background-color: rgba(14, 1, 1, 0.37); color: rgb(255, 187, 0); font-size: 10px; display: flex; justify-content: center; align-items: center; cursor: pointer; border: 5px solid rgba(255, 253, 253, 0.349);">
           增加次数
         </view>
       </view>
