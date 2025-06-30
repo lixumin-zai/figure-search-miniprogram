@@ -77,6 +77,19 @@
       <view style="color: rgb(87, 166, 240); font-size: 12px; font-weight: bold; display: inline-block;" user-select="true" bindtap="copyID">antibsurl</view>
       </view>
       
+
+    <!-- <view style="width: 78%; margin: auto; padding: 10px; margin-top: 10px; background-color: #f8f8f8; border-radius: 8px; border: 1px solid #ddd; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+      <view style="text-align: center; font-weight: bold; color: #e44d26; margin-bottom: 0px;font-size: 14px">公告
+      </view>
+      <view style="font-size: 10px; line-height: 1.2; color: #333; ">各位同学好，最近GPU服务器由于不可抗力因素导致模型不能正常推理，本小程序随时可能停止服务，带来不便深感抱歉🥺。</view>
+      <view style="font-size: 10px; line-height: 1.2; color: #333; margin-top: 4px;">
+        本人起初只是为了尽自己微薄之力提高下秋招效率，但目前该工具价值不大了！😊同时也跟不上新版本题目，如果后续有机会的话会花时间调整并对模型和数据进行升级更新🫡！！最后非常感谢同学们对本产品的支持，感谢社区，同时祝各位能找到满意的offer💌。
+      </view>
+      <view style="font-size: 10px; line-height: 1.2; color: #333; margin-top: 4px;">
+        剩余使用次数可以添加微信<view style="color: rgb(87, 166, 240); font-size: 10px; font-weight: bold; display: inline-block;" user-select="true" bindtap="copyMyID">15016649205</view>进行售后。
+      </view>
+    </view> -->
+    
       <ad-custom unit-id="adunit-63e06bc8b6a004cd" bindload="adLoad" binderror="adError" bindclose="adClose" style="width: 90%; margin: 20px auto;"></ad-custom>
 
       <view wx:if="{{showModal}}">
@@ -85,4 +98,27 @@
     </view>
     
   </view>
+
+<view class="announcement-mask" wx:if="{{showAnnouncement}}" catchtouchmove="preventTouchMove">
+  <!-- 使用 animation 属性来应用动画 -->
+  <view class="announcement-box">
+
+    <!-- 2. 标题 -->
+    <view class="announcement-title">2025-06-30 公告</view>
+
+    <!-- 3. 内容区域 -->
+    <view class="announcement-content">
+      <!-- 将内容分段，阅读体验更佳 -->
+      <view class="content-paragraph">各位同学好，最近GPU服务器由于不可抗力因素导致模型不能正常推理，本小程序随时可能停止服务，带来不便深感抱歉🥺。</view>
+      <view class="content-paragraph">另外本人起初只是为了尽自己微薄之力提高下秋招效率，但目前该工具价值不大了！😊同时也跟不上新版本题目，如果后续有机会的话会花时间调整并对模型和数据进行升级更新🫡！！</view>
+      <view class="content-paragraph">最后非常感谢同学们对本产品的支持，感谢社区，同时祝各位能找到满意的offer💌。</view>
+      <view class="content-paragraph strong">剩余使用次数添加以下微信进行售后<text bindtap="copyMyID" style='display: inline-block;color: rgb(87, 166, 240)'>15016649205</text></view>
+    </view>
+
+    <!-- 4. 操作按钮 -->
+    <view class="announcement-actions">
+      <view class="action-btn" bindtap="handleAcknowledge">确认</view>
+    </view>
+  </view>
+</view>
 </scroll-view>

@@ -43,3 +43,238 @@ button {
   font-weight: bold;           /* 设置字体为粗体 */
 }
 
+/* 遮罩层 */
+.announcement-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(8px);
+}
+
+/* 公告弹窗主体 */
+.announcement-box {
+  width: 85%;
+  max-width: 600rpx;
+  background: #ffffff;
+  border-radius: 32rpx;
+  padding: 60rpx 40rpx 40rpx;
+  box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.15), 0 8rpx 32rpx rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  border: 2rpx solid #f0f0f0;
+}
+
+/* 装饰性背景元素 */
+.announcement-box::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.02) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* 顶部图标区域 */
+.announcement-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.announcement-icon {
+  width: 80rpx;
+  height: 80rpx;
+  filter: drop-shadow(0 4rpx 8rpx rgba(0, 0, 0, 0.1));
+  animation: bellShake 2s ease-in-out infinite;
+}
+
+/* 铃铛摇摆动画 */
+@keyframes bellShake {
+  0%, 50%, 100% { transform: rotate(0deg); }
+  10%, 30% { transform: rotate(-10deg); }
+  20%, 40% { transform: rotate(10deg); }
+}
+
+/* 标题样式 */
+.announcement-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 40rpx;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 1rpx;
+}
+
+/* 内容区域 */
+.announcement-content {
+  background: #fafafa;
+  border-radius: 20rpx;
+  padding: 40rpx 30rpx;
+  margin-bottom: 40rpx;
+  box-shadow: inset 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 1;
+  border: 1rpx solid #f0f0f0;
+}
+
+/* 内容段落 */
+.content-paragraph {
+  font-size: 28rpx;
+  line-height: 1.7;
+  color: #333333;
+  margin-bottom: 24rpx;
+  text-align: justify;
+  font-weight: 400;
+}
+
+.content-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+/* 强调文本 */
+.content-paragraph.strong {
+  font-weight: 600;
+  color: #2c3e50;
+  background: #f8f9fa;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  border-left: 6rpx solid #34495e;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 可选择文本样式 */
+.content-paragraph text[selectable] {
+  background: #2c3e50;
+  color: white;
+  padding: 4rpx 8rpx;
+  border-radius: 6rpx;
+  font-weight: 600;
+  font-family: 'Monaco', 'Menlo', monospace;
+}
+
+/* 操作按钮区域 */
+.announcement-actions {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* 按钮样式 */
+.action-btn {
+  background: #2c3e50;
+  color: white;
+  font-size: 32rpx;
+  font-weight: 600;
+  padding: 24rpx 60rpx;
+  border-radius: 50rpx;
+  text-align: center;
+  box-shadow: 0 8rpx 20rpx rgba(44, 62, 80, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 1rpx;
+}
+
+/* 按钮悬停效果 */
+.action-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.action-btn:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 4rpx 12rpx rgba(44, 62, 80, 0.4);
+  background: #34495e;
+}
+
+.action-btn:active::before {
+  left: 100%;
+}
+
+/* 响应式设计 */
+@media (max-width: 750rpx) {
+  .announcement-box {
+    width: 90%;
+    padding: 50rpx 30rpx 30rpx;
+  }
+  
+  .announcement-title {
+    font-size: 32rpx;
+  }
+  
+  .content-paragraph {
+    font-size: 26rpx;
+  }
+  
+  .action-btn {
+    font-size: 30rpx;
+    padding: 20rpx 50rpx;
+  }
+}
+
+/* 进入动画 */
+.announcement-enter {
+  animation: slideInUp 0.5s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100rpx);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 退出动画 */
+.announcement-exit {
+  animation: slideOutDown 0.3s ease-in;
+}
+
+@keyframes slideOutDown {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100rpx);
+    opacity: 0;
+  }
+}
+
+/* 高级细节优化 */
+.announcement-box {
+  backdrop-filter: blur(20rpx);
+}
+
+.announcement-title::after {
+  content: '';
+  display: block;
+  width: 60rpx;
+  height: 4rpx;
+  background: #2c3e50;
+  margin: 20rpx auto 0;
+  border-radius: 2rpx;
+}

@@ -17,6 +17,7 @@ Page({
     clipboardText: '',
     openidCode: "",
     adViewTimes: 0,
+    showAnnouncement: true
   },
   bindKeyInput: function (e: any) {
     this.setData({
@@ -46,7 +47,19 @@ Page({
       data: "antibsurl",
       success: function() {
         wx.showToast({
-          title: '直接去微信搜索框黏贴，添加antibsurl',
+          title: '已复制： antibsurl 直接去微信搜索框黏贴',
+          icon: "none",
+          duration: 4000
+        });
+      }
+    });
+  },
+  copyMyID(){
+    wx.setClipboardData({
+      data: "15016649205",
+      success: function() {
+        wx.showToast({
+          title: '已复制：15016649205 直接去微信搜索框黏贴',
           icon: "none",
           duration: 4000
         });
@@ -486,4 +499,42 @@ Page({
   adClose() {
     console.log('原生模板广告关闭')
   },
+  // 显示公告模态框
+  showAnnouncementModal: function() {
+    this.setData({
+      showAnnouncement: true
+    });
+  },
+
+  // 关闭公告（内部调用）
+  closeAnnouncement: function() {
+    this.setData({
+      showAnnouncement: false
+    });
+  },
+
+  // "Got it" 按钮的点击事件
+  handleAcknowledge: function() {
+    console.log("User has acknowledged the announcement.");
+    // 关闭公告
+    this.closeAnnouncement();
+  },
+  isShowAnnouncement: function () {
+    const that = this;
+    wx.request({
+      url: 'https://lismin.online:23333/show-announcement',
+      method: 'GET',
+      success: function(response:Record<string, any>) {
+        // 处理成功响应
+        that.setData({
+          showAnnouncement: response.data.showAnnouncement
+        })
+      },
+      fail: function(error) {
+        that.setData({
+          showAnnouncement: true
+        })
+      }
+    })
+  }
 })
